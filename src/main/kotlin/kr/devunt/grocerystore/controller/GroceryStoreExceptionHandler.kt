@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class GroceryStoreExceptionHandler {
     @ExceptionHandler(EmptyResultDataAccessException::class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleEmptyResultDataAccessException() {
     }
 }

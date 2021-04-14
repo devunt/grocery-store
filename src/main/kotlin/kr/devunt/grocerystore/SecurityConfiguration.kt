@@ -43,11 +43,11 @@ class SecurityConfiguration(
                 }
 
                 authenticationEntryPoint = AuthenticationEntryPoint { _, response, exception ->
-                    response.sendError(HttpStatus.UNAUTHORIZED.value(), exception.toString())
+                    response.sendError(HttpStatus.BAD_REQUEST.value(), exception.toString())
                 }
 
                 accessDeniedHandler = AccessDeniedHandler { _, response, exception ->
-                    response.sendError(HttpStatus.UNAUTHORIZED.value(), exception.toString())
+                    response.sendError(HttpStatus.BAD_REQUEST.value(), exception.toString())
                 }
             }
         }
