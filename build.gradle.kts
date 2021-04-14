@@ -27,9 +27,11 @@ dependencies {
     implementation(spring("starter-web"))
     implementation(spring("starter-data-jpa"))
     implementation(spring("starter-security"))
-    implementation(spring("starter-validation"))
+    implementation(spring("starter-oauth2-resource-server"))
+    implementation("org.springframework.security:spring-security-oauth2-jose")
     developmentOnly(spring("devtools"))
 
+    implementation("org.bouncycastle:bcpkix-jdk15on:1.68")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("com.h2database:h2")
 

@@ -1,4 +1,4 @@
-package kr.devunt.grocerystore.component
+package kr.devunt.grocerystore.db
 
 import kr.devunt.grocerystore.db.model.Category
 import kr.devunt.grocerystore.db.model.Item
@@ -14,8 +14,8 @@ class FixtureLoader(
     private val itemRepository: ItemRepository,
 ) : ApplicationRunner {
     override fun run(args: ApplicationArguments) {
-        val fruits = Category(name = "과일", slug = "fruit")
-        val vegetables = Category(name = "채소", slug = "vegatable")
+        val fruits = Category(name = "과일", slug = "fruit", tokenIssueType = Category.TokenIssueType.BODY)
+        val vegetables = Category(name = "채소", slug = "vegetable", tokenIssueType = Category.TokenIssueType.HEADER)
 
         categoryRepository.saveAll(listOf(fruits, vegetables))
         itemRepository.saveAll(

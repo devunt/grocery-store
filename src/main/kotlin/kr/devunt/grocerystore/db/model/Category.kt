@@ -16,4 +16,12 @@ class Category(
 
     @Column(nullable = false, unique = true)
     val slug: String,
-)
+
+    @Column(nullable = false)
+    val tokenIssueType: TokenIssueType
+) {
+    enum class TokenIssueType {
+        HEADER,
+        BODY,
+    }
+}
