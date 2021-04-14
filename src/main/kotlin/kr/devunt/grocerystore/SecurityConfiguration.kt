@@ -17,6 +17,9 @@ import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+
 
 @Configuration
 class SecurityConfiguration(
@@ -31,8 +34,9 @@ class SecurityConfiguration(
             sessionManagement { sessionCreationPolicy = SessionCreationPolicy.STATELESS }
 
             authorizeRequests {
-                authorize("/token", permitAll)
-                authorize(anyRequest, authenticated)
+                authorize("/item", authenticated)
+                authorize("/product", authenticated)
+                authorize(anyRequest, permitAll)
             }
 
             oauth2ResourceServer {
@@ -49,6 +53,16 @@ class SecurityConfiguration(
                 accessDeniedHandler = AccessDeniedHandler { _, response, exception ->
                     response.sendError(HttpStatus.BAD_REQUEST.value(), exception.toString())
                 }
+            }
+        }
+    }
+
+    @Bean
+    fun corsConfigurer(): WebMvcConfigurer? {
+        return object : WebMvcConfigurer {
+            override fun addCorsMappings(registry: CorsRegistry) {
+                registry.addMapping("/**")
+                    .exposedHeaders("*")
             }
         }
     }

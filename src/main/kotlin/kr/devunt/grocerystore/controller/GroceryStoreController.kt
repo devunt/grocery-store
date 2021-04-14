@@ -1,5 +1,6 @@
 package kr.devunt.grocerystore.controller
 
+import kr.devunt.grocerystore.controller.dto.CategoryDto
 import kr.devunt.grocerystore.controller.dto.ItemDto
 import kr.devunt.grocerystore.controller.dto.KeyDto
 import kr.devunt.grocerystore.db.model.Category
@@ -28,12 +29,16 @@ class GroceryStoreController(
             Category.TokenIssueType.HEADER ->
                 ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, ResponseCookie.from("Authorization", token).build().toString())
+                    .header(HttpHeaders.AUTHORIZATION, token)
                     .body(null)
 
             Category.TokenIssueType.BODY ->
                 KeyDto(accessToken = token)
         }
     }
+
+    @GetMapping("/categories")
+    fun categories(): List<CategoryDto> = categoryService.all().map { CategoryDto(name = it.name, slug = it.slug) }
 
     @GetMapping("/product", "/item")
     fun item(

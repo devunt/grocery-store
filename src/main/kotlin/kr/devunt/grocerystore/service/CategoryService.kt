@@ -8,4 +8,5 @@ class CategoryService(
     private val categoryRepository: CategoryRepository,
 ) {
     fun get(host: String) = categoryRepository.findBySlug(host.substringBefore("."))
+    fun all() = categoryRepository.findAll()
 }
