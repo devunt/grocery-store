@@ -35,8 +35,12 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("com.h2database:h2")
 
-    testImplementation(spring("starter-test"))
+    testImplementation(spring("starter-test")) {
+        exclude(module = "mockito-core")
+    }
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("com.ninja-squad:springmockk:3.0.1")
+    testImplementation("io.strikt:strikt-spring:0.30.1")
 }
 
 allOpen {
